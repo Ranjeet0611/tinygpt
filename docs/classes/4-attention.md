@@ -18,6 +18,8 @@ flowchart LR
 
 ## SimpleAttention
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step05-simple-attention.md)
+
 🗣️ **In one sentence:** each word checks **how similar** it is to every word, turns that into percentages, and becomes a **mix** of all the words.
 
 🌍 **Real-life picture:** making a smoothie. Each fruit you add is a word. The more a word matters, the more of it goes into the cup.
@@ -66,6 +68,8 @@ So "mat" now carries a little bit of "cat" and "sat" inside it.
 
 ## SelfAttention
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step06-self-attention.md)
+
 🗣️ **In one sentence:** like SimpleAttention, but each word first makes three **learned** versions of itself: a **Query** (what am I looking for?), a **Key** (what do I have?) and a **Value** (what do I give?).
 
 🌍 **Real-life picture:** a library.
@@ -111,6 +115,8 @@ flowchart LR
 
 ## CausalAttention
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step07-causal-attention.md)
+
 🗣️ **In one sentence:** self-attention where each word may only look at **itself and the words before it**, never the words after it.
 
 🌍 **Real-life picture:** a test where you must cover the answers below with a sheet of paper. If you could peek, you'd learn nothing.
@@ -139,6 +145,8 @@ It also uses `Dropout` on the percentages while practising.
 ---
 
 ## MultiHeadAttention
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step08-multi-head-attention.md)
 
 🗣️ **In one sentence:** runs **several causal attentions side by side** ("heads"), each free to look for something different, then joins their findings.
 

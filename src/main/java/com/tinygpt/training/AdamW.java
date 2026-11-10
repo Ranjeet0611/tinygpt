@@ -27,7 +27,7 @@ import java.util.List;
  *
  * Book: Chapter 5.2
  *
- * Picture guide: docs/classes/6-training.md#adamw
+ * Picture guide: docs/classes/6-training.md#adamw · line by line: docs/walkthroughs/step-tinygpt-training.md
  */
 public class AdamW {
 

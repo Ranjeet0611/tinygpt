@@ -31,7 +31,7 @@ import com.tinygpt.nn.Module;
  *
  * Book: Chapter 4.4 (shortcuts) and 4.5 (transformer block)
  *
- * Picture guide: docs/classes/5-model.md#transformerblock
+ * Picture guide: docs/classes/5-model.md#transformerblock · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public class TransformerBlock extends Module {
 

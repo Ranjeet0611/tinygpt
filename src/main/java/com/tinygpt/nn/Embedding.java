@@ -22,7 +22,7 @@ import ai.djl.ndarray.types.Shape;
  * Same as {@code torch.nn.Embedding}.
  * Book: Chapter 2.7
  *
- * Picture guide: docs/classes/3-nn.md#embedding
+ * Picture guide: docs/classes/3-nn.md#embedding · line by line: docs/walkthroughs/step04-embeddings.md
  */
 public class Embedding extends Module {
 

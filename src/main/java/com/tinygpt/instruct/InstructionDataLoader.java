@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**
- * Packs instruction examples into batches. Unlike the story, every example has a <b>different length</b>,
+ * Packs instruction examples (or conversations) into batches. Unlike the story, every example has a <b>different length</b>,
  * so the short ones are padded to match the longest one in the batch.
  *
  * <pre>
@@ -34,7 +34,7 @@ import java.util.Random;
  *
  * Book: Chapter 7.3 ({@code custom_collate_fn})
  *
- * Picture guide: docs/classes/9-chat.md#instructiondataloader
+ * Picture guide: docs/classes/9-chat.md#instructiondataloader · line by line: docs/walkthroughs/finetune-and-chat.md
  */
 public class InstructionDataLoader implements Iterable<Batch> {
 
@@ -45,10 +45,13 @@ public class InstructionDataLoader implements Iterable<Batch> {
     private final int maxLength;
     private final Random random = new Random(123);
 
-    public InstructionDataLoader(List<Instruction> data, Tokenizer tokenizer, int batchSize, boolean shuffle,
+    /**
+     * @param texts  one practice text per example, e.g. {@link Instruction#fullText()} or a whole conversation
+     */
+    public InstructionDataLoader(List<String> texts, Tokenizer tokenizer, int batchSize, boolean shuffle,
                                  boolean dropLast, int maxLength) {
-        for (Instruction example : data) {
-            examples.add(tokenizer.encode(example.fullText()));
+        for (String text : texts) {
+            examples.add(tokenizer.encode(text));
         }
         this.batchSize = batchSize;
         this.shuffle = shuffle;

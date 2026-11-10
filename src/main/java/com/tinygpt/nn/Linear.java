@@ -20,7 +20,7 @@ import ai.djl.ndarray.types.Shape;
  *
  * Same as {@code torch.nn.Linear}.
  *
- * Picture guide: docs/classes/3-nn.md#linear
+ * Picture guide: docs/classes/3-nn.md#linear · line by line: docs/walkthroughs/step06-self-attention.md
  */
 public class Linear extends Module {
 

@@ -9,7 +9,7 @@ import ai.djl.ndarray.types.Shape;
  *
  * <pre>
  *   before:  [ 0.2, 9.0, -4.0, 30.0 ]   (wild sizes)
- *   after:   [-0.6, 0.0, -0.9,  1.6 ]   (mean 0, variance 1)
+ *   after:   [-0.66, 0.02, -0.98, 1.62]   (mean 0, variance 1)
  * </pre>
  *
  * Like adjusting the volume so no instrument is too loud or too quiet.
@@ -18,7 +18,7 @@ import ai.djl.ndarray.types.Shape;
  *
  * Book: Chapter 4.2
  *
- * Picture guide: docs/classes/3-nn.md#layernorm
+ * Picture guide: docs/classes/3-nn.md#layernorm · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public class LayerNorm extends Module {
 

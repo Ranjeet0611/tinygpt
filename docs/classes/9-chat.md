@@ -1,6 +1,6 @@
-# Packages `pretrained` and `instruct`: borrowing GPT-2's brain and teaching it to chat
+# Packages `pretrained`, `instruct` and `dialog`: borrowing GPT-2's brain and teaching it to chat
 
-← [main and examples](8-main-and-examples.md) · [All classes](README.md) · Concept guide: [9. Chat with GPT-2](../09-chat-with-gpt2.md)
+← [main and examples](8-main-and-examples.md) · [All classes](README.md) · Concept guides: [9. Chat with GPT-2](../09-chat-with-gpt2.md), [10. Talk](../10-talk-with-dailydialog.md)
 
 ```mermaid
 flowchart LR
@@ -11,11 +11,17 @@ flowchart LR
     I["📝 Instruction"] --> L["📦 InstructionDataLoader"]
     L --> F
     F -->|"saves"| C["💬 Chat"]
+    W --> FT["🎓 FineTuneTalk<br/>practises conversations"]
+    DL["🎭 Dialogue"] --> L
+    L --> FT
+    FT -->|"saves"| T["🗣️ Talk"]
 ```
 
 ---
 
 ## Downloads
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step12-load-gpt2.md)
 
 🗣️ **In one sentence:** downloads a file the first time it's needed, and reuses the saved copy after that.
 
@@ -40,6 +46,8 @@ Downloading to `.part` first means a download that was interrupted halfway is ne
 
 ## SafeTensors
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step12-load-gpt2.md)
+
 🗣️ **In one sentence:** reads a `.safetensors` file, the format Hugging Face uses to share a model's learned numbers.
 
 🌍 **Real-life picture:** a book with a **table of contents** at the front: "Chapter *wte.weight* is on pages 287,209,472 to 441,598,976". You look up the name, then jump straight to those pages.
@@ -61,6 +69,8 @@ block-beta
 ---
 
 ## GPT2Weights
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step12-load-gpt2.md)
 
 🗣️ **In one sentence:** copies OpenAI's trained GPT-2 numbers into **our own** `GPTModel`, matching each of OpenAI's part names to ours.
 
@@ -113,6 +123,8 @@ The settings must match GPT-2 exactly, so they come from [`GPT2Size`](#gpt2size)
 
 ## GPT2Size
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step12-load-gpt2.md)
+
 🗣️ **In one sentence:** the two GPT-2 sizes you can download (small and medium), each with its settings card, download address and file names.
 
 🌍 **Real-life picture:** a menu with a small and a large size. Same recipe, different amounts.
@@ -134,6 +146,8 @@ flowchart TD
 ---
 
 ## Instruction
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-and-chat.md)
 
 🗣️ **In one sentence:** one practice example (*a request, optional extra input, and a good answer*), and how to write it out so the model can tell the request and the answer apart.
 
@@ -157,6 +171,8 @@ When chatting, we send only `prompt()`, which ends at `### Response:`, and the m
 
 ## InstructionDataLoader
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-and-chat.md)
+
 🗣️ **In one sentence:** packs instruction examples (which all have **different lengths**) into batches, padding the short ones and marking the padding as "don't grade".
 
 🌍 **Real-life picture:** packing different-length pencils into a box. Short ones get a cap on the end so they all line up, and the teacher knows the caps aren't part of the pencils.
@@ -179,6 +195,8 @@ flowchart TD
 ---
 
 ## FineTune
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-and-chat.md)
 
 🗣️ **In one sentence:** the program that loads GPT-2, practises on 935 instruction examples for 2 rounds, and saves the result for chatting.
 
@@ -204,6 +222,8 @@ The learning rate is **20 times smaller** than TinyGPT's (0.00005 vs 0.001): GPT
 ---
 
 ## Chat
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-and-chat.md)
 
 🗣️ **In one sentence:** a terminal chat loop: it wraps what you type in the instruction format, lets the fine-tuned model answer, and repeats.
 
@@ -241,3 +261,85 @@ Type `Translate to French || Good morning`, and everything after `||` becomes th
 It picks GPT-2 medium automatically if you've fine-tuned it; `./run.sh chat small` forces small.
 
 🔗 **In the code:** [`Chat.java`](../../src/main/java/com/tinygpt/Chat.java) · Run it: `./run.sh chat` (after `./run.sh finetune`)
+
+---
+
+## Dialogue
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-talk-and-talk.md)
+
+🗣️ **In one sentence:** one everyday conversation from DailyDialog, written out as a **play script** (`A: ...` / `B: ...`, one line per turn).
+
+🌍 **Real-life picture:** the script of a short school play: who says what, in order.
+
+🖼️ **Diagram**
+
+```mermaid
+flowchart LR
+    Z["📦 data/dailydialog.zip<br/>(data/dialogues.json)"] -->|"load(zip, 'train')"| D["Dialogue<br/>turns: ['Hi!', 'Hello. How are you?', 'Fine, thanks.']"]
+    D -->|"text()"| T["A: Hi!<br/>B: Hello. How are you?<br/>A: Fine, thanks.<br/>"]
+    D -->|"firstTokens(tokenizer, 256)"| C["only the whole turns<br/>that fit in 256 tokens"]
+    H["history so far<br/>['Hi!']"] -->|"prompt(history)"| P["A: Hi!<br/>B:"]
+```
+
+🔢 **Tiny example:**
+- `new Dialogue(List.of("Hi!", "Hello. How are you?")).text()` → `"A: Hi!\nB: Hello. How are you?\n"`
+- `Dialogue.prompt(List.of("Hi!"))` → `"A: Hi!\nB:"`. The model finishes B's line.
+- `Dialogue.NEW_LINE_ID` = **198**, GPT-2's token for `\n`. When the model writes it, its turn is over.
+
+🔗 **In the code:** [`Dialogue.java`](../../src/main/java/com/tinygpt/dialog/Dialogue.java) · tested in `DialogueTest`
+
+---
+
+## FineTuneTalk
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-talk-and-talk.md)
+
+🗣️ **In one sentence:** the program that loads GPT-2, practises on 11,118 DailyDialog conversations for 1 round, and saves the result for talking.
+
+🌍 **Real-life picture:** the same well-read person as in [FineTune](#finetune), but this time they watch thousands of short plays about everyday life to learn **how people chat**.
+
+🖼️ **Diagram**
+
+```mermaid
+flowchart TD
+    A["⬇️ download GPT-2 + DailyDialog (3.7 MB)"] --> B["🎭 Dialogue.load<br/>11,118 practise · 1,000 check"]
+    B --> C["✂️ firstTokens(256).text()<br/>play scripts"]
+    C --> L["📦 InstructionDataLoader<br/>padding + -100, as in FineTune"]
+    G["🧠 GPTModel + GPT2Weights.load"] --> E
+    L --> E["🏋️ Trainer: 1 epoch<br/>learning rate 0.00005"]
+    E --> F["💾 save models/gpt2-talk.params"]
+```
+
+🔢 **Tiny example: counting the work.** 11,118 conversations ÷ 8 per batch = **1,389 steps** (one round). On an M4 Pro, GPT-2 small took **71.6 minutes** (validation loss 2.39 → 2.22).
+
+`reply(generator, history)` asks for the next line: `continuation(Dialogue.prompt(history), 60, 0.7, 40, stop = 198)`.
+
+🔗 **In the code:** [`FineTuneTalk.java`](../../src/main/java/com/tinygpt/FineTuneTalk.java) · Run it: `./run.sh finetune-talk` (or `./run.sh finetune-talk medium`)
+
+---
+
+## Talk
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/finetune-talk-and-talk.md)
+
+🗣️ **In one sentence:** a terminal conversation that **remembers**: it sends the whole conversation so far each time, and the model writes B's next line.
+
+🌍 **Real-life picture:** unlike [Chat](#chat)'s walkie-talkie, this is a phone call: the other person remembers what you said a minute ago.
+
+🖼️ **Diagram**
+
+```mermaid
+flowchart TD
+    Y["You type a line"] --> H["history.add(your line)<br/>(keep the last 10 turns)"]
+    H --> P["Dialogue.prompt(history)<br/>'A: ...\nB: ...\nA: your line\nB:'"]
+    P --> R["FineTuneTalk.reply<br/>writes until \n"]
+    R --> H2["history.add(reply)"]
+    H2 --> O["Bot: reply"]
+    O --> Y
+```
+
+🔢 **Tiny example:** after two turns the history is `["Hi! How are you?", "I'm fine, thanks. And you?"]`, so the next prompt starts with `A: Hi! How are you?\nB: I'm fine, thanks. And you?\nA: ...`.
+Type `new` to clear the history, `exit` to quit.
+
+🔗 **In the code:** [`Talk.java`](../../src/main/java/com/tinygpt/Talk.java) · Run it: `./run.sh talk` (after `./run.sh finetune-talk`)

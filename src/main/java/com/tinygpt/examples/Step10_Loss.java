@@ -14,7 +14,7 @@ import com.tinygpt.training.Loss;
  * Run: ./run.sh 10
  * Book: Chapter 5.1
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step10-loss.md
  */
 public class Step10_Loss {
 

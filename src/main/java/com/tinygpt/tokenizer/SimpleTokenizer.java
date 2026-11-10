@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  *
  * Book: Chapter 2.2 (splitting), 2.3 (token IDs), 2.4 (special tokens)
  *
- * Picture guide: docs/classes/1-tokenizer.md#simpletokenizer
+ * Picture guide: docs/classes/1-tokenizer.md#simpletokenizer · line by line: docs/walkthroughs/step01-simple-tokenizer.md
  */
 public class SimpleTokenizer implements Tokenizer {
 

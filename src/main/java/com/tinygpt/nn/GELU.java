@@ -22,7 +22,7 @@ import ai.djl.ndarray.NDArray;
  *
  * Book: Chapter 4.3
  *
- * Picture guide: docs/classes/3-nn.md#gelu
+ * Picture guide: docs/classes/3-nn.md#gelu · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public final class GELU {
 

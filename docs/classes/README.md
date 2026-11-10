@@ -41,6 +41,7 @@ flowchart TD
     CFG["📋 GPTConfig<br/>size settings"] -.-> BRAIN
     GW["📦 GPT2Weights<br/>OpenAI's numbers"] -.->|"or start from GPT-2"| BRAIN
     BRAIN -->|"fine-tuned"| CH["💬 Chat"]
+    BRAIN -->|"fine-tuned on conversations"| TK["🗣️ Talk"]
 ```
 
 And here is what is **inside** one `TransformerBlock`:
@@ -89,9 +90,12 @@ flowchart LR
 | | `GPT2Weights` | Puts OpenAI's GPT-2 numbers into our model. | [chat](9-chat.md#gpt2weights) |
 | instruct | `Instruction` | One "request → good answer" example, in the chat format. | [chat](9-chat.md#instruction) |
 | | `InstructionDataLoader` | Pads different-length examples into batches. | [chat](9-chat.md#instructiondataloader) |
+| dialog | `Dialogue` | One everyday conversation, written as an `A:` / `B:` script. | [chat](9-chat.md#dialogue) |
 | (root) | `TinyGPT` | The main program: train, save, write. | [main and examples](8-main-and-examples.md#tinygpt) |
 | | `FineTune` | Teaches GPT-2 to follow instructions. | [chat](9-chat.md#finetune) |
 | | `Chat` | Talk to the fine-tuned GPT-2 in the terminal. | [chat](9-chat.md#chat) |
+| | `FineTuneTalk` | Teaches GPT-2 everyday conversation (DailyDialog). | [chat](9-chat.md#finetunetalk) |
+| | `Talk` | A conversation that remembers what was said. | [chat](9-chat.md#talk) |
 | examples | `Step01` … `Step12` | Small runnable demos, one per idea. | [main and examples](8-main-and-examples.md#the-step-programs) |
 
 ---

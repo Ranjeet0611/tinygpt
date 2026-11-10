@@ -23,13 +23,20 @@ import java.nio.file.StandardCopyOption;
  *
  * Downloading to ".part" first means a half-finished download is never mistaken for a complete one.
  *
- * Picture guide: docs/classes/9-chat.md#downloads
+ * Picture guide: docs/classes/9-chat.md#downloads · line by line: docs/walkthroughs/step12-load-gpt2.md
  */
 public final class Downloads {
 
     /** The book's 1,100 instruction examples (chapter 7). 200 KB. */
     public static final String INSTRUCTION_DATA_URL =
             "https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/main/ch07/01_main-chapter-code/instruction-data.json";
+
+    /**
+     * DailyDialog: 13,118 everyday conversations (ConvLab's copy on Hugging Face). 3.7 MB zip.
+     * License CC BY-NC-SA 4.0: free for learning and research, not for commercial use.
+     */
+    public static final String DAILY_DIALOG_URL =
+            "https://huggingface.co/datasets/ConvLab/dailydialog/resolve/main/data.zip";
 
     private Downloads() {}
 

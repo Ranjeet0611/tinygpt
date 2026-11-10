@@ -17,7 +17,7 @@ import ai.djl.ndarray.NDManager;
  *
  * Book: Chapter 4.3
  *
- * Picture guide: docs/classes/3-nn.md#feedforward
+ * Picture guide: docs/classes/3-nn.md#feedforward · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public class FeedForward extends Module {
 

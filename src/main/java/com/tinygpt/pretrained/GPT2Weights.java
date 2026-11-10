@@ -33,7 +33,7 @@ import java.util.Set;
  *
  * Book: Chapter 5.5 ({@code load_weights_into_gpt})
  *
- * Picture guide: docs/classes/9-chat.md#gpt2weights
+ * Picture guide: docs/classes/9-chat.md#gpt2weights · line by line: docs/walkthroughs/step12-load-gpt2.md
  */
 public final class GPT2Weights {
 

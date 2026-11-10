@@ -6,6 +6,8 @@
 
 ## TinyGPT
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step-tinygpt-training.md)
+
 🗣️ **In one sentence:** the main program that runs the whole journey: read the story, build the model, train it, save it, and let it write.
 
 🌍 **Real-life picture:** the recipe card that uses all the ingredients (classes) in the right order.

@@ -18,7 +18,7 @@ import com.tinygpt.tokenizer.BpeTokenizer;
  * Run: ./run.sh 12   (downloads 548 MB the first time)
  * Book: Chapter 5.5
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step12-load-gpt2.md
  */
 public class Step12_LoadGPT2 {
 

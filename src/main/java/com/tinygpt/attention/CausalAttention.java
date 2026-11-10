@@ -25,7 +25,7 @@ import com.tinygpt.nn.Module;
  *
  * Book: Chapter 3.5
  *
- * Picture guide: docs/classes/4-attention.md#causalattention
+ * Picture guide: docs/classes/4-attention.md#causalattention · line by line: docs/walkthroughs/step07-causal-attention.md
  */
 public class CausalAttention extends Module {
 

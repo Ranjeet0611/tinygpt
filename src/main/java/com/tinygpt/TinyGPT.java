@@ -24,7 +24,7 @@ import java.nio.file.Path;
  *
  * Book: Chapter 5 brings together everything from chapters 2, 3 and 4.
  *
- * Picture guide: docs/classes/8-main-and-examples.md#tinygpt
+ * Picture guide: docs/classes/8-main-and-examples.md#tinygpt · line by line: docs/walkthroughs/step-tinygpt-training.md
  */
 public class TinyGPT {
 

@@ -22,7 +22,7 @@ import ai.djl.ndarray.types.DataType;
  *
  * Book: Chapter 5.1
  *
- * Picture guide: docs/classes/6-training.md#loss
+ * Picture guide: docs/classes/6-training.md#loss · line by line: docs/walkthroughs/step10-loss.md
  */
 public final class Loss {
 

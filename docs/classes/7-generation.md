@@ -6,6 +6,8 @@
 
 ## TextGenerator
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step11-sampling.md)
+
 🗣️ **In one sentence:** makes the model **write**: it asks for the next word, adds it to the text, and repeats.
 
 🌍 **Real-life picture:** a game of "one word each" story-telling, where the model always adds the next word.

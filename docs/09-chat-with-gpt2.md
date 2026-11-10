@@ -2,7 +2,7 @@
 
 **Book:** Chapter 5.5 and Chapter 7 · **Code:** [`pretrained/`](../src/main/java/com/tinygpt/pretrained), [`instruct/`](../src/main/java/com/tinygpt/instruct), [`FineTune.java`](../src/main/java/com/tinygpt/FineTune.java), [`Chat.java`](../src/main/java/com/tinygpt/Chat.java) · **Run:** `./run.sh 12`, `./run.sh finetune`, `./run.sh chat` · **Class pictures:** [chat classes](classes/9-chat.md)
 
-← [8. How everything connects](08-how-everything-connects.md) · [README](../README.md)
+← [8. How everything connects](08-how-everything-connects.md) · [README](../README.md) · Next: [10. Talk →](10-talk-with-dailydialog.md)
 
 ```mermaid
 flowchart LR

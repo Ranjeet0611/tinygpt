@@ -15,7 +15,7 @@ import java.nio.file.Path;
  *
  * Bigger knows more facts and follows instructions better, but is slower.
  *
- * Picture guide: docs/classes/9-chat.md#gpt2size
+ * Picture guide: docs/classes/9-chat.md#gpt2size · line by line: docs/walkthroughs/step12-load-gpt2.md
  */
 public enum GPT2Size {
 
@@ -49,6 +49,11 @@ public enum GPT2Size {
     /** Our fine-tuned chat version, e.g. models/gpt2-chat.params */
     public Path chatModelFile() {
         return Path.of("models", name + "-chat.params");
+    }
+
+    /** Our version fine-tuned on everyday conversations (DailyDialog), e.g. models/gpt2-talk.params */
+    public Path talkModelFile() {
+        return Path.of("models", name + "-talk.params");
     }
 
     @Override

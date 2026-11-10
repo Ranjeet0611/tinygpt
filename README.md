@@ -75,6 +75,8 @@ cd tinygpt
 ./run.sh generate "I had always"   # let your trained model write
 ./run.sh finetune                  # teach OpenAI's GPT-2 to follow instructions (about 6 minutes)
 ./run.sh chat                      # chat with it!
+./run.sh finetune-talk             # teach GPT-2 everyday conversation, DailyDialog (about 70 minutes)
+./run.sh talk                      # have a conversation that it remembers
 ./mvnw test                        # run the tests
 ```
 
@@ -102,6 +104,7 @@ a diagram of the data moving through our code → how it connects to the other p
 | 7 | [Writing text](docs/07-generating-text.md) | greedy, temperature, top-k | 4.7, 5.3 |
 | 8 | [How everything connects](docs/08-how-everything-connects.md) | one sentence through the whole machine | 2–5 |
 | 9 | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | load OpenAI's GPT-2 into our model, teach it to follow instructions, chat | 5.5, 7 |
+| 10 | [Talk (DailyDialog)](docs/10-talk-with-dailydialog.md) | same recipe, new data: teach it to hold a conversation, with memory | (7) |
 
 ## The steps
 
@@ -125,8 +128,14 @@ Each guide in [`docs/`](docs) explains that step with pictures.
 | 12 | Load OpenAI's GPT-2 into our model | `./run.sh 12` | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | 5.5 |
 | 🎓 | **Teach GPT-2 to follow instructions** | `./run.sh finetune` | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | 7 |
 | 💬 | **Chat with it** | `./run.sh chat` | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | 7.7 |
+| 🎭 | **Teach GPT-2 everyday conversation** (DailyDialog) | `./run.sh finetune-talk` | [Talk](docs/10-talk-with-dailydialog.md) | (7) |
+| 🗣️ | **Talk with it, with memory** | `./run.sh talk` | [Talk](docs/10-talk-with-dailydialog.md) | |
 
 New words? See the [glossary](docs/glossary.md).
+
+### 🔬 Line by line, with real numbers
+
+[docs/walkthroughs](docs/walkthroughs/README.md) takes every program (steps 1-12, training, fine-tuning, chat and talk) and explains it **line by line**, including every class it uses: the code, what it does, a diagram, and the real numbers it produces, small enough to check with a calculator. Start with [step 1](docs/walkthroughs/step01-simple-tokenizer.md).
 
 ### 🖼️ Every class, explained with pictures
 
@@ -151,6 +160,7 @@ flowchart LR
     model --> generation["📦 generation<br/>TextGenerator"]
     pretrained["📦 pretrained<br/>load OpenAI's GPT-2"] --> model
     instruct["📦 instruct<br/>instruction data"] --> training
+    dialog["📦 dialog<br/>conversation data"] --> training
 ```
 
 ```
@@ -158,6 +168,8 @@ src/main/java/com/tinygpt/
 ├── TinyGPT.java                  ← train TinyGPT from scratch, save it, let it write
 ├── FineTune.java                 ← teach GPT-2 to follow instructions (chapter 7)
 ├── Chat.java                     ← chat with the fine-tuned GPT-2
+├── FineTuneTalk.java             ← teach GPT-2 everyday conversation (DailyDialog)
+├── Talk.java                     ← a conversation that remembers
 ├── tokenizer/                    Chapter 2: text ⇄ numbers
 │   ├── Tokenizer.java              the interface: encode() and decode()
 │   ├── SimpleTokenizer.java        one ID per word, made by us
@@ -198,6 +210,8 @@ src/main/java/com/tinygpt/
 ├── instruct/                     Chapter 7: instruction fine-tuning
 │   ├── Instruction.java            one request + answer, in the chat format
 │   └── InstructionDataLoader.java  padding and -100 "don't grade" targets
+├── dialog/                       Same recipe, new data: conversations
+│   └── Dialogue.java               one conversation as an "A: / B:" script
 └── examples/                     Steps 1–12, one small program each
 ```
 
@@ -240,6 +254,12 @@ Bot: The author of 'Pride and Prejudice' is Robert Frost.     ← confidently wr
 GPT-2 small (124M numbers) learns the **manners** quickly but knows few **facts**. For better answers, use the book's choice:
 `./run.sh finetune medium` (GPT-2 medium, 355M, a 1.5 GB download). The full story is in [docs/09-chat-with-gpt2.md](docs/09-chat-with-gpt2.md).
 
+### Want it to chat like a person instead of answering quizzes?
+
+Fine-tune on **conversations** instead of instructions: `./run.sh finetune-talk` uses
+[DailyDialog](https://huggingface.co/datasets/ConvLab/dailydialog) (11,118 everyday conversations), and `./run.sh talk` remembers
+what you've said. See [docs/10-talk-with-dailydialog.md](docs/10-talk-with-dailydialog.md).
+
 The downloads go into `models/` and `data/`, which git ignores.
 
 ---
@@ -272,6 +292,7 @@ If it happens you will see a line like `(Skipped 1 of 225 steps ...)`. Training 
 
 - Book: *Build a Large Language Model (From Scratch)* by Sebastian Raschka (Manning, 2024). Python code: [rasbt/LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch).
 - Training text: *The Verdict* by Edith Wharton (1908, public domain).
+- Conversation data: [DailyDialog](http://yanran.li/dailydialog) by Li et al. (2017), via [ConvLab on Hugging Face](https://huggingface.co/datasets/ConvLab/dailydialog), CC BY-NC-SA 4.0 (downloaded at run time, not included in this repo).
 - GPT-2 weights: OpenAI ([openai/gpt-2](https://github.com/openai/gpt-2), Modified MIT License), downloaded from [Hugging Face](https://huggingface.co/openai-community/gpt2).
 - Instruction data: the book's [instruction-data.json](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07/01_main-chapter-code) (Apache 2.0), downloaded when you run `./run.sh finetune`.
 - Libraries: [DJL](https://djl.ai/) with PyTorch, [JTokkit](https://github.com/knuddelsgmbh/jtokkit) for GPT-2's tokenizer, and [Gson](https://github.com/google/gson) for JSON.

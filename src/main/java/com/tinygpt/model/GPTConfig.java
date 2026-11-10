@@ -13,7 +13,7 @@ package com.tinygpt.model;
  *
  * Book: Chapter 4.1
  *
- * Picture guide: docs/classes/5-model.md#gptconfig
+ * Picture guide: docs/classes/5-model.md#gptconfig · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public record GPTConfig(
         int vocabularySize,

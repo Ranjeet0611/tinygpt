@@ -13,7 +13,7 @@ import com.tinygpt.attention.SelfAttention;
  * Run: ./run.sh 6
  * Book: Chapter 3.4
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step06-self-attention.md
  */
 public class Step06_SelfAttention {
 

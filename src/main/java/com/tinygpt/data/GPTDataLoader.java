@@ -23,7 +23,7 @@ import java.util.Random;
  *
  * Book: Chapter 2.6
  *
- * Picture guide: docs/classes/2-data.md#gptdataloader
+ * Picture guide: docs/classes/2-data.md#gptdataloader · line by line: docs/walkthroughs/step03-sliding-window.md
  */
 public class GPTDataLoader implements Iterable<Batch> {
 

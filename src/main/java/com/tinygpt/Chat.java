@@ -32,7 +32,7 @@ import java.nio.file.Files;
  *
  * Book: Chapter 7.7 (extracting responses)
  *
- * Picture guide: docs/classes/9-chat.md#chat
+ * Picture guide: docs/classes/9-chat.md#chat · line by line: docs/walkthroughs/finetune-and-chat.md
  */
 public class Chat {
 

@@ -19,6 +19,8 @@ flowchart LR
 
 ## Module
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step06-self-attention.md)
+
 🗣️ **In one sentence:** the parent class of every layer: it keeps a list of the layer's **learnable numbers** (parameters) and of the **smaller layers inside it**.
 
 🌍 **Real-life picture:** Russian nesting dolls. Each doll can contain smaller dolls. If you ask the biggest doll "how many dolls are there?", it counts every doll inside it.
@@ -46,6 +48,8 @@ It also has an on/off switch, `setTraining(true/false)`, which it passes down to
 ---
 
 ## Linear
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step06-self-attention.md)
 
 🗣️ **In one sentence:** makes new numbers by **multiplying each input by a weight, adding them up, and adding an extra "bias"**. The weights are what the model learns.
 
@@ -76,6 +80,8 @@ Many outputs = many different bills from the same shopping basket.
 ---
 
 ## Embedding
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step04-embeddings.md)
 
 🗣️ **In one sentence:** a **lookup table** that turns a word's number into a list of numbers describing that word.
 
@@ -115,6 +121,8 @@ GPT uses **two** tables: one for *which word* it is, and one for *which position
 
 ## LayerNorm
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step09-gpt-model.md)
+
 🗣️ **In one sentence:** rescales a list of numbers so they are **centred around 0 and not too spread out**, whatever size they started at.
 
 🌍 **Real-life picture:** a sound engineer's volume knob. Whether a singer whispers or shouts, the knob brings them to the same comfortable level, and the *tune* stays the same.
@@ -143,6 +151,8 @@ After that, two learnable numbers (`scale` and `shift`) let the model turn the v
 ---
 
 ## GELU
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step09-gpt-model.md)
 
 🗣️ **In one sentence:** a **gate** for numbers: positive numbers pass through almost unchanged, and negative numbers are squeezed to (almost) zero.
 
@@ -177,6 +187,8 @@ The bends are what let the model learn complicated patterns.
 
 ## Dropout
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step07-causal-attention.md)
+
 🗣️ **In one sentence:** while practising, it **randomly switches off** some numbers (sets them to 0), and makes the rest a bit bigger to make up for it.
 
 🌍 **Real-life picture:** football practice where random players are told to sit out each time. Everyone has to learn to play well, instead of always passing to the one star player.
@@ -200,6 +212,8 @@ flowchart LR
 ---
 
 ## FeedForward
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step09-gpt-model.md)
 
 🗣️ **In one sentence:** gives each word some private "thinking time": it **expands** the word's numbers to 4× as many, bends them with GELU, then **shrinks** them back.
 

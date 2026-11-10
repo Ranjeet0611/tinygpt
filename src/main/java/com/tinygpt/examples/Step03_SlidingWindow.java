@@ -14,7 +14,7 @@ import java.util.Arrays;
  * Run: ./run.sh 3
  * Book: Chapter 2.6
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step03-sliding-window.md
  */
 public class Step03_SlidingWindow {
 

@@ -10,7 +10,7 @@ import com.tinygpt.attention.SimpleAttention;
  * Run: ./run.sh 5
  * Book: Chapter 3.3
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step05-simple-attention.md
  */
 public class Step05_SimpleAttention {
 

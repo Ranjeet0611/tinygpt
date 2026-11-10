@@ -35,7 +35,7 @@ import java.util.List;
  *
  * Book: Chapter 4.6
  *
- * Picture guide: docs/classes/5-model.md#gptmodel
+ * Picture guide: docs/classes/5-model.md#gptmodel · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public class GPTModel extends Module {
 

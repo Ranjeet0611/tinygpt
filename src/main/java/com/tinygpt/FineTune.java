@@ -31,7 +31,7 @@ import java.util.List;
  *
  * Book: Chapter 7
  *
- * Picture guide: docs/classes/9-chat.md#finetune
+ * Picture guide: docs/classes/9-chat.md#finetune · line by line: docs/walkthroughs/finetune-and-chat.md
  */
 public class FineTune {
 
@@ -77,8 +77,8 @@ public class FineTune {
 
             // 3. Practise
             int maxLength = model.config().contextLength();
-            InstructionDataLoader trainLoader = new InstructionDataLoader(train, tokenizer, BATCH_SIZE, true, true, maxLength);
-            InstructionDataLoader validationLoader = new InstructionDataLoader(validation, tokenizer, BATCH_SIZE, false, false, maxLength);
+            InstructionDataLoader trainLoader = new InstructionDataLoader(texts(train), tokenizer, BATCH_SIZE, true, true, maxLength);
+            InstructionDataLoader validationLoader = new InstructionDataLoader(texts(validation), tokenizer, BATCH_SIZE, false, false, maxLength);
 
             Trainer trainer = new Trainer(model, manager, LEARNING_RATE, WEIGHT_DECAY);
             long start = System.currentTimeMillis();
@@ -100,6 +100,10 @@ public class FineTune {
                 System.out.println("  model answer:   " + answer(generator, example));
             }
         }
+    }
+
+    private static List<String> texts(List<Instruction> instructions) {
+        return instructions.stream().map(Instruction::fullText).toList();
     }
 
     /** Ask the model, greedily, and stop when it says <|endoftext|> ("I'm finished"). */

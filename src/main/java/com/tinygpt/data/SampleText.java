@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
  * Loads the training text: "The Verdict", a short story by Edith Wharton (1908, public domain).
  * It is the same text the book uses. About 20,000 characters, or 5,145 GPT-2 tokens.
  *
- * Picture guide: docs/classes/2-data.md#sampletext
+ * Picture guide: docs/classes/2-data.md#sampletext · line by line: docs/walkthroughs/step01-simple-tokenizer.md
  */
 public final class SampleText {
 

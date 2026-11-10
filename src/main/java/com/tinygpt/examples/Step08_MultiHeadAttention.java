@@ -13,7 +13,7 @@ import com.tinygpt.attention.MultiHeadAttention;
  * Run: ./run.sh 8
  * Book: Chapter 3.6
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step08-multi-head-attention.md
  */
 public class Step08_MultiHeadAttention {
 

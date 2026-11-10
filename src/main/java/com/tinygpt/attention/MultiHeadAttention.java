@@ -31,7 +31,7 @@ import com.tinygpt.nn.Module;
  *
  * Book: Chapter 3.6
  *
- * Picture guide: docs/classes/4-attention.md#multiheadattention
+ * Picture guide: docs/classes/4-attention.md#multiheadattention · line by line: docs/walkthroughs/step08-multi-head-attention.md
  */
 public class MultiHeadAttention extends Module {
 

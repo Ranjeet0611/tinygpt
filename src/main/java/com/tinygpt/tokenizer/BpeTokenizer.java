@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  *
  * Book: Chapter 2.5
  *
- * Picture guide: docs/classes/1-tokenizer.md#bpetokenizer
+ * Picture guide: docs/classes/1-tokenizer.md#bpetokenizer · line by line: docs/walkthroughs/step02-byte-pair-encoding.md
  */
 public class BpeTokenizer implements Tokenizer {
 

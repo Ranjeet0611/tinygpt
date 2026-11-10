@@ -17,7 +17,7 @@ import ai.djl.ndarray.NDArray;
  *
  * Book: Chapter 3.5.2
  *
- * Picture guide: docs/classes/3-nn.md#dropout
+ * Picture guide: docs/classes/3-nn.md#dropout · line by line: docs/walkthroughs/step07-causal-attention.md
  */
 public class Dropout extends Module {
 

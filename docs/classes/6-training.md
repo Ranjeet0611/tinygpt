@@ -15,6 +15,8 @@ flowchart LR
 
 ## Loss
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step10-loss.md)
+
 🗣️ **In one sentence:** gives **one number for how wrong** the model's guesses were: 0 means perfect, and bigger means worse.
 
 🌍 **Real-life picture:** darts. The loss is how far your dart landed from the bullseye.
@@ -53,6 +55,8 @@ If the right word is #2 out of 5: `[0, 0, 1, 0, 0]`. That's called **one-hot**.
 
 ## AdamW
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step-tinygpt-training.md)
+
 🗣️ **In one sentence:** after each guess, it **nudges every one of the model's numbers a tiny bit** in the direction that makes the loss smaller.
 
 🌍 **Real-life picture:** walking down a hill in thick fog to reach the bottom (the lowest loss). You can't see the bottom, only feel which way the ground slopes under your feet. So you take small steps downhill, like a ball rolling with momentum.
@@ -88,6 +92,8 @@ If something went wrong and a gradient is "NaN" (not a number), it **skips that 
 ---
 
 ## Trainer
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step-tinygpt-training.md)
 
 🗣️ **In one sentence:** the **practice coach**: it hands the model batch after batch, and after each one runs *guess → loss → find gradients → AdamW step*. Now and then it tests the model on text it has never practised on.
 

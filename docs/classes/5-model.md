@@ -6,6 +6,8 @@
 
 ## GPTConfig
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step09-gpt-model.md)
+
 🗣️ **In one sentence:** a **settings card** that says how big the model is: how many words it knows, how much it can read at once, how many layers, and so on.
 
 🌍 **Real-life picture:** the settings screen of a video game: map size, number of players, difficulty.
@@ -42,6 +44,8 @@ Want a different size? Make your own card: `new GPTConfig(50257, 64, 64, 2, 2, 0
 
 ## TransformerBlock
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step09-gpt-model.md)
+
 🗣️ **In one sentence:** one "floor" of the model, where words first **listen to each other** (attention) and then each **thinks alone** (feed forward), always keeping a copy of what they had before.
 
 🌍 **Real-life picture:** a classroom lesson. First a group discussion, then quiet thinking time. And you never throw your old notes away: you just add the new ideas to them.
@@ -75,6 +79,8 @@ TinyGPT stacks **4** of these floors; GPT-2 stacks **12**.
 ---
 
 ## GPTModel
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step09-gpt-model.md)
 
 🗣️ **In one sentence:** the complete brain: word numbers go in, and for every position out comes a **score for each of the 50,257 possible next words**.
 

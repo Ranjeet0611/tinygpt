@@ -58,3 +58,6 @@
 | **Greedy decoding** | Always picking the highest-scoring next token. | [writing text](07-generating-text.md) |
 | **Temperature** | How random the choice is. Low = careful, high = creative. | [writing text](07-generating-text.md) |
 | **Top-k** | Only choosing among the k best tokens. | [writing text](07-generating-text.md) |
+| **Dialogue dataset** | Practice data made of whole conversations (like DailyDialog), so a model learns to take turns. | [talk](10-talk-with-dailydialog.md) |
+| **Conversation memory** | Sending the whole conversation so far with every new message, so the model can "remember" it. | [talk](10-talk-with-dailydialog.md) |
+| **Dataset license** | The rules for using someone's data. DailyDialog is CC BY-NC-SA: free for learning, not for selling. | [talk](10-talk-with-dailydialog.md) |

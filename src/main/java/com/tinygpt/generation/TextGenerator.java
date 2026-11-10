@@ -29,7 +29,7 @@ import java.util.Random;
  *
  * Book: Chapter 4.7 (greedy) and 5.3 (temperature, top-k)
  *
- * Picture guide: docs/classes/7-generation.md#textgenerator
+ * Picture guide: docs/classes/7-generation.md#textgenerator · line by line: docs/walkthroughs/step11-sampling.md
  */
 public class TextGenerator {
 

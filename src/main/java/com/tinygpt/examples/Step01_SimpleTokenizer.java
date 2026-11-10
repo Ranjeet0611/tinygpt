@@ -13,7 +13,7 @@ import java.util.Map;
  * Run: ./run.sh 1
  * Book: Chapter 2.2, 2.3, 2.4
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step01-simple-tokenizer.md
  */
 public class Step01_SimpleTokenizer {
 
@@ -54,7 +54,7 @@ public class Step01_SimpleTokenizer {
         System.out.println("4) Unknown words: " + withNewWords);
         System.out.println("   IDs:    " + Arrays.toString(newIds));
         System.out.println("   Decode: " + tokenizer.decode(newIds));
-        System.out.println("   'Hello', 'tea' and 'palace' were never in the story, so they became <|unk|>.");
+        System.out.println("   'Hello' and 'palace' were never in the story, so they became <|unk|>.");
         System.out.println("   That loses information. Step 2 fixes this with Byte Pair Encoding.");
     }
 }

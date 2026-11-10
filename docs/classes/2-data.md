@@ -9,6 +9,8 @@ These classes turn a story into thousands of those questions.
 
 ## SampleText
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step01-simple-tokenizer.md)
+
 🗣️ **In one sentence:** loads the story *The Verdict* (by Edith Wharton, 1908) from the project's resources folder as one long piece of text.
 
 🌍 **Real-life picture:** taking the textbook off the shelf before you start studying.
@@ -27,6 +29,8 @@ flowchart LR
 ---
 
 ## GPTDataset
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step03-sliding-window.md)
 
 🗣️ **In one sentence:** slides a "window" along the story's numbers and makes **question/answer pairs**, where the answer is the question shifted one word to the right.
 
@@ -65,6 +69,8 @@ With jump `1` instead of `4`, the windows overlap, and you get 6 examples instea
 
 ## Batch
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step03-sliding-window.md)
+
 🗣️ **In one sentence:** one box of practice questions, holding the **inputs** and their **targets** (answers) as two grids of the same size.
 
 🌍 **Real-life picture:** a stack of flashcards with the question on the front (input) and the answer on the back (target).
@@ -88,6 +94,8 @@ Because both loaders make the same kind of `Batch`, one `Trainer` can train on e
 ---
 
 ## GPTDataLoader
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step03-sliding-window.md)
 
 🗣️ **In one sentence:** packs the examples into **batches** (boxes of several examples), optionally shuffled, so the model can practise on many at once.
 

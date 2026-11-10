@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Run one step of the TinyGPT journey.
 #
-#   ./run.sh 1                    run Step01 (any number 1-11)
-#   ./run.sh train                train the tiny GPT and save it (step 12)
+#   ./run.sh 1                    run Step01 (any number 1-12)
+#   ./run.sh train                train the tiny GPT and save it
 #   ./run.sh generate "Hello"     let the saved model write text
 #   ./run.sh finetune [medium]    teach GPT-2 to follow instructions (book chapter 7)
 #   ./run.sh chat [small|medium]  chat with the fine-tuned GPT-2
+#   ./run.sh finetune-talk [medium]  teach GPT-2 everyday conversation (DailyDialog)
+#   ./run.sh talk [small|medium]  have a conversation with it
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -13,7 +15,7 @@ export MAVEN_OPTS="${MAVEN_OPTS:-} --enable-native-access=ALL-UNNAMED"
 
 case "${1:-}" in
   ""|-h|--help)
-    echo "Usage: ./run.sh <1-12 | train | generate \"prompt\" | finetune | chat>"
+    echo "Usage: ./run.sh <1-12 | train | generate \"prompt\" | finetune | chat | finetune-talk | talk>"
     echo
     ls src/main/java/com/tinygpt/examples | sed 's/\.java$//; s/^/  /'
     exit 0
@@ -30,10 +32,15 @@ case "${1:-}" in
     main=com.tinygpt.FineTune
     args="${2:-small}"
     ;;
-  chat)
+  finetune-talk)
+    main=com.tinygpt.FineTuneTalk
+    args="${2:-small}"
+    ;;
+  chat|talk)
     # Run Java directly (not through Maven) so typing in the terminal works normally
+    [ "$1" = chat ] && main=com.tinygpt.Chat || main=com.tinygpt.Talk
     ./mvnw -q compile dependency:build-classpath -Dmdep.outputFile=target/classpath.txt 2>&1 | grep -v -E '^WARNING: ' || true
-    exec java --enable-native-access=ALL-UNNAMED -cp "target/classes:$(cat target/classpath.txt)" com.tinygpt.Chat ${2:-} \
+    exec java --enable-native-access=ALL-UNNAMED -cp "target/classes:$(cat target/classpath.txt)" "$main" ${2:-} \
       2> >(grep -v -E 'LegacyTypeDispatch' >&2)
     ;;
   *)

@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Run: ./run.sh 2
  * Book: Chapter 2.5
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step02-byte-pair-encoding.md
  */
 public class Step02_BytePairEncoding {
 

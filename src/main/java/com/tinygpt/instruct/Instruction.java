@@ -35,7 +35,7 @@ import java.util.List;
  *
  * Book: Chapter 7.2 ({@code format_input})
  *
- * Picture guide: docs/classes/9-chat.md#instruction
+ * Picture guide: docs/classes/9-chat.md#instruction · line by line: docs/walkthroughs/finetune-and-chat.md
  */
 public record Instruction(String instruction, String input, String output) {
 

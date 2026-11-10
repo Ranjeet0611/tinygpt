@@ -29,7 +29,7 @@ import java.util.Map;
  * Calling {@link #parameters()} on the top module collects every number in the whole tree,
  * so the optimizer can update all of them.
  *
- * Picture guide: docs/classes/3-nn.md#module
+ * Picture guide: docs/classes/3-nn.md#module · line by line: docs/walkthroughs/step06-self-attention.md
  */
 public abstract class Module {
 

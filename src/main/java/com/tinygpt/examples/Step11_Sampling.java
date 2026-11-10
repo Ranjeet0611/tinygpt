@@ -12,7 +12,7 @@ import java.util.Random;
  * Run: ./run.sh 11
  * Book: Chapter 5.3
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step11-sampling.md
  */
 public class Step11_Sampling {
 

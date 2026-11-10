@@ -29,7 +29,7 @@ import java.util.Set;
  *
  * To read a tensor, look up its name in the table of contents, then read the bytes between its two offsets.
  *
- * Picture guide: docs/classes/9-chat.md#safetensors
+ * Picture guide: docs/classes/9-chat.md#safetensors · line by line: docs/walkthroughs/step12-load-gpt2.md
  */
 public final class SafeTensors {
 

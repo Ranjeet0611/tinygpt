@@ -21,7 +21,7 @@ import ai.djl.ndarray.NDArray;
  *
  * Book: Chapter 3.3
  *
- * Picture guide: docs/classes/4-attention.md#simpleattention
+ * Picture guide: docs/classes/4-attention.md#simpleattention · line by line: docs/walkthroughs/step05-simple-attention.md
  */
 public final class SimpleAttention {
 

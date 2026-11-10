@@ -27,7 +27,7 @@ import com.tinygpt.model.GPTModel;
  *
  * Book: Chapter 5.2 ({@code train_model_simple})
  *
- * Picture guide: docs/classes/6-training.md#trainer
+ * Picture guide: docs/classes/6-training.md#trainer · line by line: docs/walkthroughs/step-tinygpt-training.md
  */
 public class Trainer {
 

@@ -8,6 +8,8 @@ Computers can only do maths with numbers. These classes swap words for numbers, 
 
 ## Tokenizer
 
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step01-simple-tokenizer.md)
+
 🗣️ **In one sentence:** the *rule* that every tokenizer must follow: it must be able to turn text into numbers (`encode`) and numbers back into text (`decode`).
 
 🌍 **Real-life picture:** a phone charger socket. Different chargers (tokenizers) can be plugged in, as long as they fit the same socket shape.
@@ -30,6 +32,8 @@ The `TextGenerator` doesn't care which tokenizer it gets. It only calls `encode`
 ---
 
 ## SimpleTokenizer
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step01-simple-tokenizer.md)
 
 🗣️ **In one sentence:** our home-made tokenizer: it gives **every word one number**, using a word list made from the story.
 
@@ -66,6 +70,8 @@ flowchart TD
 ---
 
 ## BpeTokenizer
+
+🔬 **Line by line with real numbers:** [walkthrough](../walkthroughs/step02-byte-pair-encoding.md)
 
 🗣️ **In one sentence:** GPT-2's real tokenizer: common words get one number, and rare words are **built from smaller pieces**, so nothing is ever "unknown".
 

@@ -26,7 +26,7 @@ import com.tinygpt.nn.Module;
  *
  * Book: Chapter 3.4
  *
- * Picture guide: docs/classes/4-attention.md#selfattention
+ * Picture guide: docs/classes/4-attention.md#selfattention · line by line: docs/walkthroughs/step06-self-attention.md
  */
 public class SelfAttention extends Module {
 

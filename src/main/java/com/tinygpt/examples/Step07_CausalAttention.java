@@ -16,7 +16,7 @@ import com.tinygpt.nn.Dropout;
  * Run: ./run.sh 7
  * Book: Chapter 3.5
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step07-causal-attention.md
  */
 public class Step07_CausalAttention {
 

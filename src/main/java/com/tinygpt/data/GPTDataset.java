@@ -29,7 +29,7 @@ import java.util.List;
  *
  * Book: Chapter 2.6
  *
- * Picture guide: docs/classes/2-data.md#gptdataset
+ * Picture guide: docs/classes/2-data.md#gptdataset · line by line: docs/walkthroughs/step03-sliding-window.md
  */
 public class GPTDataset {
 

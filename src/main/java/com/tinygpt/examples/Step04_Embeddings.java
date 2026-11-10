@@ -15,7 +15,7 @@ import com.tinygpt.tokenizer.BpeTokenizer;
  * Run: ./run.sh 4
  * Book: Chapter 2.7 (token embeddings) and 2.8 (position embeddings)
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step04-embeddings.md
  */
 public class Step04_Embeddings {
 

@@ -14,7 +14,7 @@ import com.tinygpt.tokenizer.BpeTokenizer;
  * Run: ./run.sh 9   (needs about 1 GB of memory for the 163 million numbers)
  * Book: Chapter 4.1 - 4.7
  *
- * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs
+ * Picture guide: docs/classes/8-main-and-examples.md#the-step-programs · line by line: docs/walkthroughs/step09-gpt-model.md
  */
 public class Step09_GPTModel {
 
@@ -44,7 +44,7 @@ public class Step09_GPTModel {
             TextGenerator generator = new TextGenerator(model, tokenizer, manager, 123);
             System.out.println("Let the untrained model write 6 tokens after \"Hello, I am\":");
             System.out.println("   " + generator.generateGreedy("Hello, I am", 6));
-            System.out.println("Nonsense, because all weights are still random. Training (step 12) fixes that.");
+            System.out.println("Nonsense, because all weights are still random. Training (./run.sh train) fixes that.");
         }
     }
 }

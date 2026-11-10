@@ -12,7 +12,7 @@ package com.tinygpt.tokenizer;
  *
  * Book: Chapter 2.2 - 2.5
  *
- * Picture guide: docs/classes/1-tokenizer.md#tokenizer
+ * Picture guide: docs/classes/1-tokenizer.md#tokenizer · line by line: docs/walkthroughs/step01-simple-tokenizer.md
  */
 public interface Tokenizer {
 
