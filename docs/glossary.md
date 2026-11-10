@@ -4,8 +4,13 @@
 
 | Word | Simple meaning | Where |
 |---|---|---|
-| **LLM** (Large Language Model) | A program that has read a huge amount of text and learned to guess the next word really well. | everywhere |
-| **GPT** | "Generative Pre-trained Transformer". A type of LLM: it *generates* text, is *pre-trained* on lots of text, and is built from *transformer* blocks. | [model](05-gpt-model.md) |
+| **LLM** (Large Language Model) | A program that has read a huge amount of text and learned to guess the next word really well. | [what is an LLM](00-what-is-an-llm.md) |
+| **GPT** | "Generative Pre-trained Transformer". A type of LLM: it *generates* text, is *pre-trained* on lots of text, and is built from *transformer* blocks. | [what is an LLM](00-what-is-an-llm.md) |
+| **Pretraining / fine-tuning** | First learning from lots of ordinary text; then extra training for a special job. | [what is an LLM](00-what-is-an-llm.md) |
+| **Encoder / decoder** | The "understanding" half and the "writing" half of the original transformer. GPT keeps only the decoder. | [what is an LLM](00-what-is-an-llm.md) |
+| **Broadcasting** | Reusing a smaller grid for every row of a bigger one, e.g. the same position rows for every window in a batch. | [embeddings](03-embeddings.md) |
+| **Context vector** | A token's vector after attention: itself, mixed with the relevant words before it. | [attention](04-attention.md) |
+| **Vanishing gradient** | The learning signal fading away as it travels back through many layers. Shortcuts fix it. | [model](05-gpt-model.md) |
 | **Token** | A piece of text: a word, part of a word, or a punctuation mark. | [tokenization](01-tokenization.md) |
 | **Token ID** | The number that stands for a token. | [tokenization](01-tokenization.md) |
 | **Vocabulary** | The list of all tokens the model knows. GPT-2 knows 50,257. | [tokenization](01-tokenization.md) |

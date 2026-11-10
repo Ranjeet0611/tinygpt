@@ -12,7 +12,7 @@ Each class gets the same five things:
 | 🔢 **Tiny example** | small, friendly numbers you can check yourself |
 | 🔗 **In the code** | where to find it, and who uses it |
 
-← [Back to the main README](../../README.md)
+← [Back to the main README](../../README.md) · Prefer to learn concept by concept? Start with [0. What is an LLM?](../00-what-is-an-llm.md)
 
 ---
 

@@ -83,6 +83,23 @@ On Windows, run the steps with Maven directly:
 
 ---
 
+## The guides: read them in order
+
+Each guide follows one part of the book. Each has the same layout: **why we need it → the idea with an everyday picture → the book's example worked step by step →
+a diagram of the data moving through our code → how it connects to the other parts → try it yourself**.
+
+| # | Guide | What you'll understand | Book |
+|---:|---|---|---|
+| 0 | [What is an LLM?](docs/00-what-is-an-llm.md) | the "guess the next word" game, pretraining, what GPT is | 1 |
+| 1 | [Tokens](docs/01-tokenization.md) | how text becomes numbers, and why GPT-2 uses word pieces | 2.2–2.5 |
+| 2 | [Training data](docs/02-training-data.md) | how a story becomes thousands of quizzes | 2.6 |
+| 3 | [Embeddings](docs/03-embeddings.md) | why each token becomes a list of numbers, plus its position | 2.1, 2.7–2.8 |
+| 4 | [Attention](docs/04-attention.md) | how words look at each other (Q, K, V, mask, heads) | 3 |
+| 5 | [The GPT model](docs/05-gpt-model.md) | LayerNorm, GELU, shortcuts, blocks, the full model | 4 |
+| 6 | [Training](docs/06-training.md) | loss, gradients, AdamW, overfitting, saving | 5.1–5.2, 5.4 |
+| 7 | [Writing text](docs/07-generating-text.md) | greedy, temperature, top-k | 4.7, 5.3 |
+| 8 | [How everything connects](docs/08-how-everything-connects.md) | one sentence through the whole machine | 2–5 |
+
 ## The steps
 
 Each step is one small program in [`src/main/java/com/tinygpt/examples`](src/main/java/com/tinygpt/examples).
