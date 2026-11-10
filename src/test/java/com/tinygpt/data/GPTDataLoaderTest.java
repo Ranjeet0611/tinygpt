@@ -38,7 +38,7 @@ class GPTDataLoaderTest {
 
     private static int count(GPTDataLoader loader) {
         int batches = 0;
-        for (GPTDataLoader.Batch ignored : loader) {
+        for (Batch ignored : loader) {
             batches++;
         }
         return batches;

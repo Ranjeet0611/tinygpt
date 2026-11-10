@@ -70,9 +70,11 @@ You need **Java 25** (or newer). Maven comes with the project (`./mvnw`).
 git clone <this repo>
 cd tinygpt
 
-./run.sh 1                         # run step 1 (try 1 to 11)
+./run.sh 1                         # run step 1 (try 1 to 12)
 ./run.sh train                     # train the tiny GPT (about 20 seconds) and save it
 ./run.sh generate "I had always"   # let your trained model write
+./run.sh finetune                  # teach OpenAI's GPT-2 to follow instructions (about 6 minutes)
+./run.sh chat                      # chat with it!
 ./mvnw test                        # run the tests
 ```
 
@@ -99,6 +101,7 @@ a diagram of the data moving through our code → how it connects to the other p
 | 6 | [Training](docs/06-training.md) | loss, gradients, AdamW, overfitting, saving | 5.1–5.2, 5.4 |
 | 7 | [Writing text](docs/07-generating-text.md) | greedy, temperature, top-k | 4.7, 5.3 |
 | 8 | [How everything connects](docs/08-how-everything-connects.md) | one sentence through the whole machine | 2–5 |
+| 9 | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | load OpenAI's GPT-2 into our model, teach it to follow instructions, chat | 5.5, 7 |
 
 ## The steps
 
@@ -118,7 +121,10 @@ Each guide in [`docs/`](docs) explains that step with pictures.
 | 9 | Build the full GPT-2 model (163 million numbers) | `./run.sh 9` | [The GPT model](docs/05-gpt-model.md) | 4 |
 | 10 | Measure how wrong the model is (loss) | `./run.sh 10` | [Training](docs/06-training.md) | 5.1 |
 | 11 | Choose the next word: greedy, temperature, top-k | `./run.sh 11` | [Writing text](docs/07-generating-text.md) | 5.3 |
-| 12 | **Train TinyGPT and make it write** | `./run.sh train` | [Training](docs/06-training.md) | 5.2, 5.4 |
+| 🏁 | **Train TinyGPT and make it write** | `./run.sh train` | [Training](docs/06-training.md) | 5.2, 5.4 |
+| 12 | Load OpenAI's GPT-2 into our model | `./run.sh 12` | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | 5.5 |
+| 🎓 | **Teach GPT-2 to follow instructions** | `./run.sh finetune` | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | 7 |
+| 💬 | **Chat with it** | `./run.sh chat` | [Chat with GPT-2](docs/09-chat-with-gpt2.md) | 7.7 |
 
 New words? See the [glossary](docs/glossary.md).
 
@@ -143,11 +149,15 @@ flowchart LR
     attention --> model
     model --> training["📦 training<br/>Loss, AdamW,<br/>Trainer"]
     model --> generation["📦 generation<br/>TextGenerator"]
+    pretrained["📦 pretrained<br/>load OpenAI's GPT-2"] --> model
+    instruct["📦 instruct<br/>instruction data"] --> training
 ```
 
 ```
 src/main/java/com/tinygpt/
-├── TinyGPT.java                  ← step 12: train, save and generate (the main program)
+├── TinyGPT.java                  ← train TinyGPT from scratch, save it, let it write
+├── FineTune.java                 ← teach GPT-2 to follow instructions (chapter 7)
+├── Chat.java                     ← chat with the fine-tuned GPT-2
 ├── tokenizer/                    Chapter 2: text ⇄ numbers
 │   ├── Tokenizer.java              the interface: encode() and decode()
 │   ├── SimpleTokenizer.java        one ID per word, made by us
@@ -155,7 +165,8 @@ src/main/java/com/tinygpt/
 ├── data/                         Chapter 2: training examples
 │   ├── SampleText.java             loads "The Verdict" (the story we train on)
 │   ├── GPTDataset.java             sliding window: input + target
-│   └── GPTDataLoader.java          groups examples into batches
+│   ├── GPTDataLoader.java          groups examples into batches
+│   └── Batch.java                  one box of inputs + targets
 ├── nn/                           Building blocks (like PyTorch's torch.nn)
 │   ├── Module.java                 parent class: keeps the learnable numbers
 │   ├── Linear.java                 multiply by a weight matrix
@@ -178,8 +189,16 @@ src/main/java/com/tinygpt/
 │   ├── AdamW.java                  the optimizer: "which way to nudge?"
 │   └── Trainer.java                the training loop
 ├── generation/
-│   └── TextGenerator.java          greedy, temperature and top-k sampling
-└── examples/                     Steps 1–11, one small program each
+│   └── TextGenerator.java          greedy, temperature and top-k sampling, stop token
+├── pretrained/                   Chapter 5.5: borrow OpenAI's GPT-2
+│   ├── GPT2Size.java               small (124M) or medium (355M)
+│   ├── Downloads.java              download once, keep the file
+│   ├── SafeTensors.java            read Hugging Face's weight files
+│   └── GPT2Weights.java            OpenAI's numbers → our GPTModel
+├── instruct/                     Chapter 7: instruction fine-tuning
+│   ├── Instruction.java            one request + answer, in the chat format
+│   └── InstructionDataLoader.java  padding and -100 "don't grade" targets
+└── examples/                     Steps 1–12, one small program each
 ```
 
 ---
@@ -197,6 +216,31 @@ src/main/java/com/tinygpt/
 | Training time | ~20 seconds on a laptop | weeks on many GPUs |
 
 Same design, just smaller. Change one line in `TinyGPT.java` to try other sizes.
+
+---
+
+## Can I chat with it?
+
+Yes, but not with the TinyGPT you train from scratch. Chatting needs **general knowledge** (from reading billions of words: weeks on big GPUs)
+and **manners** (answering a question, then stopping). So, like the book, we:
+
+1. **load OpenAI's trained GPT-2** into our own `GPTModel` (`./run.sh 12`). It matches real GPT-2 word for word;
+2. **fine-tune** it on the book's 1,100 instruction examples (`./run.sh finetune`, about 6 minutes on an M4 Pro);
+3. **chat** (`./run.sh chat`).
+
+```
+You: What is the capital of France?
+Bot: The capital of France is Paris.
+You: Give me a synonym for happy.
+Bot: A synonym for happy is "joyful."
+You: Name the author of 'Pride and Prejudice'.
+Bot: The author of 'Pride and Prejudice' is Robert Frost.     ← confidently wrong!
+```
+
+GPT-2 small (124M numbers) learns the **manners** quickly but knows few **facts**. For better answers, use the book's choice:
+`./run.sh finetune medium` (GPT-2 medium, 355M, a 1.5 GB download). The full story is in [docs/09-chat-with-gpt2.md](docs/09-chat-with-gpt2.md).
+
+The downloads go into `models/` and `data/`, which git ignores.
 
 ---
 
@@ -228,4 +272,6 @@ If it happens you will see a line like `(Skipped 1 of 225 steps ...)`. Training 
 
 - Book: *Build a Large Language Model (From Scratch)* by Sebastian Raschka (Manning, 2024). Python code: [rasbt/LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch).
 - Training text: *The Verdict* by Edith Wharton (1908, public domain).
-- Libraries: [DJL](https://djl.ai/) with PyTorch, and [JTokkit](https://github.com/knuddelsgmbh/jtokkit) for GPT-2's tokenizer.
+- GPT-2 weights: OpenAI ([openai/gpt-2](https://github.com/openai/gpt-2), Modified MIT License), downloaded from [Hugging Face](https://huggingface.co/openai-community/gpt2).
+- Instruction data: the book's [instruction-data.json](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07/01_main-chapter-code) (Apache 2.0), downloaded when you run `./run.sh finetune`.
+- Libraries: [DJL](https://djl.ai/) with PyTorch, [JTokkit](https://github.com/knuddelsgmbh/jtokkit) for GPT-2's tokenizer, and [Gson](https://github.com/google/gson) for JSON.

@@ -29,7 +29,7 @@ public class Embedding extends Module {
     private final NDArray weight;
 
     public Embedding(NDManager manager, int numberOfIds, int embeddingDim) {
-        weight = parameter(manager.randomNormal(0f, 1f, new Shape(numberOfIds, embeddingDim), DataType.FLOAT32));
+        weight = parameter("weight", manager.randomNormal(0f, 1f, new Shape(numberOfIds, embeddingDim), DataType.FLOAT32));
     }
 
     /** ids of any shape [...] -> vectors of shape [..., embeddingDim] */

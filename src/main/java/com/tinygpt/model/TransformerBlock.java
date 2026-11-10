@@ -42,12 +42,12 @@ public class TransformerBlock extends Module {
     private final Dropout dropShortcut;
 
     public TransformerBlock(NDManager manager, GPTConfig config) {
-        norm1 = child(new LayerNorm(manager, config.embeddingDim()));
-        attention = child(new MultiHeadAttention(manager, config.embeddingDim(), config.embeddingDim(),
+        norm1 = child("norm1", new LayerNorm(manager, config.embeddingDim()));
+        attention = child("attention", new MultiHeadAttention(manager, config.embeddingDim(), config.embeddingDim(),
                 config.numberOfHeads(), config.dropoutRate(), config.qkvBias()));
-        norm2 = child(new LayerNorm(manager, config.embeddingDim()));
-        feedForward = child(new FeedForward(manager, config.embeddingDim()));
-        dropShortcut = child(new Dropout(config.dropoutRate()));
+        norm2 = child("norm2", new LayerNorm(manager, config.embeddingDim()));
+        feedForward = child("feedForward", new FeedForward(manager, config.embeddingDim()));
+        dropShortcut = child("dropShortcut", new Dropout(config.dropoutRate()));
     }
 
     /** x [batch, tokens, embeddingDim] -> same shape */

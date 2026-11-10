@@ -30,8 +30,8 @@ public class Linear extends Module {
     public Linear(NDManager manager, int inFeatures, int outFeatures, boolean useBias) {
         // Random starting values between -1/√in and +1/√in, like PyTorch does by default
         float limit = (float) (1.0 / Math.sqrt(inFeatures));
-        weight = parameter(manager.randomUniform(-limit, limit, new Shape(inFeatures, outFeatures), DataType.FLOAT32));
-        bias = useBias ? parameter(manager.zeros(new Shape(outFeatures))) : null;
+        weight = parameter("weight", manager.randomUniform(-limit, limit, new Shape(inFeatures, outFeatures), DataType.FLOAT32));
+        bias = useBias ? parameter("bias", manager.zeros(new Shape(outFeatures))) : null;
     }
 
     public NDArray forward(NDArray input) {

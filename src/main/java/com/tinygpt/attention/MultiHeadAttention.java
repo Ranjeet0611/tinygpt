@@ -50,11 +50,11 @@ public class MultiHeadAttention extends Module {
         }
         this.numberOfHeads = numberOfHeads;
         this.headDim = outputDim / numberOfHeads;
-        query = child(new Linear(manager, inputDim, outputDim, qkvBias));
-        key = child(new Linear(manager, inputDim, outputDim, qkvBias));
-        value = child(new Linear(manager, inputDim, outputDim, qkvBias));
-        outputProjection = child(new Linear(manager, outputDim, outputDim, true));
-        dropout = child(new Dropout(dropoutRate));
+        query = child("query", new Linear(manager, inputDim, outputDim, qkvBias));
+        key = child("key", new Linear(manager, inputDim, outputDim, qkvBias));
+        value = child("value", new Linear(manager, inputDim, outputDim, qkvBias));
+        outputProjection = child("outputProjection", new Linear(manager, outputDim, outputDim, true));
+        dropout = child("dropout", new Dropout(dropoutRate));
     }
 
     /** x [batch, tokens, inputDim] -> [batch, tokens, outputDim] */

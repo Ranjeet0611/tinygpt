@@ -77,10 +77,10 @@ flowchart LR
     end
     S1 --> S2 --> S3
     classDef done fill:#c8e6c9,stroke:#2e7d32,color:#000
-    class A1,A2,A3,B1,B2 done
+    class A1,A2,A3,B1,B2,C2 done
 ```
 
-**This project covers stages 1 and 2** (the green boxes): chapters 2 to 5.
+**This project covers stages 1 and 2** (the green boxes): chapters 2 to 5, plus the chat assistant from stage 3 (chapter 7) in [9. Chat with GPT-2](09-chat-with-gpt2.md).
 
 | Stage | What happens | Real-life picture |
 |---|---|---|

@@ -33,6 +33,9 @@ import java.util.Random;
  */
 public class TextGenerator {
 
+    /** Pass as stopTokenId to never stop early. */
+    public static final int NO_STOP_TOKEN = -1;
+
     private final GPTModel model;
     private final Tokenizer tokenizer;
     private final NDManager manager;
@@ -53,21 +56,35 @@ public class TextGenerator {
     /**
      * @param temperature 0 = greedy; 0.5 = careful; 1.0 = normal; 1.5 = wild
      * @param topK        only consider the k most likely tokens (0 = consider all)
+     * @return the prompt followed by the new text
      */
     public String generate(String prompt, int maxNewTokens, float temperature, int topK) {
+        return prompt + continuation(prompt, maxNewTokens, temperature, topK, NO_STOP_TOKEN);
+    }
+
+    /**
+     * Only the <b>new</b> text, stopping early if the model writes {@code stopTokenId}.
+     * The chatbot uses this with stopTokenId = 50256 ({@code <|endoftext|>}): "I've finished my answer".
+     * Book: Chapter 5.3.3 ({@code eos_id})
+     */
+    public String continuation(String prompt, int maxNewTokens, float temperature, int topK, int stopTokenId) {
         boolean wasTraining = model.isTraining();
         model.setTraining(false);
 
         int[] ids = tokenizer.encode(prompt);
+        int promptLength = ids.length;
         for (int step = 0; step < maxNewTokens; step++) {
             float[] scores = nextTokenScores(ids);
             int next = temperature <= 0f ? argMax(scores) : sample(scores, temperature, topK);
+            if (next == stopTokenId) {
+                break;
+            }
             ids = Arrays.copyOf(ids, ids.length + 1);
             ids[ids.length - 1] = next;
         }
 
         model.setTraining(wasTraining);
-        return tokenizer.decode(ids);
+        return tokenizer.decode(Arrays.copyOfRange(ids, promptLength, ids.length));
     }
 
     /** Run the model and return the scores for the token that comes after the last one. */

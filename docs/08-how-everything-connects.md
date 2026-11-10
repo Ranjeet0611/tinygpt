@@ -2,7 +2,7 @@
 
 **Book:** chapters 2–5 together · **Code:** everything · **Run:** `./run.sh train`, then `./run.sh generate "Every effort moves"`
 
-← [7. Writing text](07-generating-text.md) · [README](../README.md)
+← [7. Writing text](07-generating-text.md) · Next: [9. Chat with GPT-2 →](09-chat-with-gpt2.md)
 
 The other docs zoom in on one part each. This one **zooms out**: we follow a single sentence through the whole machine, and see how the parts depend on each other.
 
@@ -237,7 +237,7 @@ And `./run.sh generate "..."` only does: **new model → load the file → TextG
 5. **The GPT model**: blocks of attention + thinking are stacked, with norms and shortcuts, ending in a score for every possible next token.
 6. **Training**: the loss says how wrong the guesses were, gradients say how to fix each number, and AdamW makes the fix, thousands of times.
 7. **Writing**: pick a next token from the scores (greedy, temperature, top-k), add it, and repeat.
-8. ChatGPT is the **same idea**, just with far more numbers, far more text, and extra fine-tuning (book chapters 6–7).
+8. ChatGPT is the **same idea**, just with far more numbers, far more text, and extra fine-tuning. [9. Chat with GPT-2](09-chat-with-gpt2.md) does a small version of that fine-tuning (book chapter 7).
 
 ## 📖 Doc index
 
@@ -252,5 +252,6 @@ And `./run.sh generate "..."` only does: **new model → load the file → TextG
 | 6 | [Training](06-training.md) | 5.1–5.2, 5.4 |
 | 7 | [Writing text](07-generating-text.md) | 4.7, 5.3 |
 | 8 | How everything connects (this page) | 2–5 |
+| 9 | [Chat with GPT-2](09-chat-with-gpt2.md) | 5.5, 7 |
 | — | [Every class, explained](classes/README.md) | — |
 | — | [Glossary](glossary.md) | — |

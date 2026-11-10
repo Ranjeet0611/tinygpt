@@ -18,6 +18,7 @@
         <pytorch.version>2.7.1</pytorch.version>
         <jtokkit.version>1.1.0</jtokkit.version>
         <junit.version>6.0.3</junit.version>
+        <gson.version>2.13.1</gson.version>
 
         <!-- Which program `./mvnw exec:java` runs. Override with -Dexec.mainClass=... -->
         <exec.mainClass>com.tinygpt.TinyGPT</exec.mainClass>
@@ -48,6 +49,13 @@
             <artifactId>pytorch-jni</artifactId>
             <version>${pytorch.version}-${djl.version}</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- Reads JSON: the GPT-2 weight file's header and the instruction dataset -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
         </dependency>
 
         <!-- Quiet the "no SLF4J provider" warning that DJL would print -->

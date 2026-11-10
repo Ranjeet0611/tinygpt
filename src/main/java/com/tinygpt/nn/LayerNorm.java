@@ -28,8 +28,8 @@ public class LayerNorm extends Module {
     private final NDArray shift;
 
     public LayerNorm(NDManager manager, int embeddingDim) {
-        scale = parameter(manager.ones(new Shape(embeddingDim)));
-        shift = parameter(manager.zeros(new Shape(embeddingDim)));
+        scale = parameter("scale", manager.ones(new Shape(embeddingDim)));
+        shift = parameter("shift", manager.zeros(new Shape(embeddingDim)));
     }
 
     public NDArray forward(NDArray x) {

@@ -63,11 +63,35 @@ With jump `1` instead of `4`, the windows overlap, and you get 6 examples instea
 
 ---
 
+## Batch
+
+🗣️ **In one sentence:** one box of practice questions, holding the **inputs** and their **targets** (answers) as two grids of the same size.
+
+🌍 **Real-life picture:** a stack of flashcards with the question on the front (input) and the answer on the back (target).
+
+🖼️ **Diagram**
+
+```mermaid
+flowchart LR
+    B["📦 Batch"] --> I["inputs<br/>[[40, 367, 2885, 1464],<br/> [1807, 3619, 402, 271], ...]"]
+    B --> T["targets<br/>[[367, 2885, 1464, 1807],<br/> [3619, 402, 271, 10899], ...]"]
+    G["GPTDataLoader<br/>(story windows)"] -->|"makes"| B
+    N["InstructionDataLoader<br/>(chat practice)"] -->|"makes"| B
+    B -->|"read by"| TR["Trainer"]
+```
+
+🔢 **Tiny example:** a target of **-100** means "don't grade this position". Only the instruction data uses it, for padding ([see chat classes](9-chat.md#instructiondataloader)).
+Because both loaders make the same kind of `Batch`, one `Trainer` can train on either.
+
+🔗 **In the code:** [`Batch.java`](../../src/main/java/com/tinygpt/data/Batch.java) · a Java `record` with two fields.
+
+---
+
 ## GPTDataLoader
 
 🗣️ **In one sentence:** packs the examples into **batches** (boxes of several examples), optionally shuffled, so the model can practise on many at once.
 
-`Batch` is the small record inside it that holds one box: `inputs` and `targets`.
+Each box is a [`Batch`](#batch): `inputs` and `targets`.
 
 🌍 **Real-life picture:** a teacher handing out flashcards in bundles of 8. Before each round the deck is shuffled, so students don't just learn the order.
 

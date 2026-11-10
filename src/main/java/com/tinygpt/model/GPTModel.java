@@ -49,14 +49,14 @@ public class GPTModel extends Module {
 
     public GPTModel(NDManager manager, GPTConfig config) {
         this.config = config;
-        tokenEmbedding = child(new Embedding(manager, config.vocabularySize(), config.embeddingDim()));
-        positionEmbedding = child(new Embedding(manager, config.contextLength(), config.embeddingDim()));
-        dropout = child(new Dropout(config.dropoutRate()));
+        tokenEmbedding = child("tokenEmbedding", new Embedding(manager, config.vocabularySize(), config.embeddingDim()));
+        positionEmbedding = child("positionEmbedding", new Embedding(manager, config.contextLength(), config.embeddingDim()));
+        dropout = child("dropout", new Dropout(config.dropoutRate()));
         for (int i = 0; i < config.numberOfLayers(); i++) {
-            blocks.add(child(new TransformerBlock(manager, config)));
+            blocks.add(child("blocks." + i, new TransformerBlock(manager, config)));
         }
-        finalNorm = child(new LayerNorm(manager, config.embeddingDim()));
-        outputHead = child(new Linear(manager, config.embeddingDim(), config.vocabularySize(), false));
+        finalNorm = child("finalNorm", new LayerNorm(manager, config.embeddingDim()));
+        outputHead = child("outputHead", new Linear(manager, config.embeddingDim(), config.vocabularySize(), false));
     }
 
     /** tokenIds [batch, tokens] -> logits [batch, tokens, vocabularySize] */

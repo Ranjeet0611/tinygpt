@@ -29,7 +29,7 @@ import java.nio.file.Path;
 public class TinyGPT {
 
     private static final Path MODEL_FILE = Path.of("models", "tinygpt.params");
-    private static final String PROMPT = "Every effort moves you";
+    private static final String PROMPT = "My name is";
 
     // Training settings
     private static final int EPOCHS = 25;

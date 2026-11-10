@@ -29,6 +29,16 @@ class TrainingTest {
     }
 
     @Test
+    void positionsMarkedIgnoreAreNotGraded() {
+        try (NDManager manager = NDManager.newBaseManager()) {
+            // position 0 is a perfect guess, position 1 is a terrible guess but marked -100
+            NDArray logits = manager.create(new float[]{0f, 100f, 0f, 100f, 0f, 0f}, new Shape(1, 2, 3));
+            NDArray targets = manager.create(new int[][]{{1, Loss.IGNORE}});
+            assertEquals(0f, Loss.crossEntropy(logits, targets).getFloat(), 1e-4);
+        }
+    }
+
+    @Test
     void lossOfARandomModelIsAboutLnVocabulary() {
         Engine.getInstance().setRandomSeed(123);
         try (NDManager manager = NDManager.newBaseManager()) {

@@ -25,8 +25,8 @@ public class FeedForward extends Module {
     private final Linear shrink;
 
     public FeedForward(NDManager manager, int embeddingDim) {
-        expand = child(new Linear(manager, embeddingDim, 4 * embeddingDim, true));
-        shrink = child(new Linear(manager, 4 * embeddingDim, embeddingDim, true));
+        expand = child("expand", new Linear(manager, embeddingDim, 4 * embeddingDim, true));
+        shrink = child("shrink", new Linear(manager, 4 * embeddingDim, embeddingDim, true));
     }
 
     public NDArray forward(NDArray x) {

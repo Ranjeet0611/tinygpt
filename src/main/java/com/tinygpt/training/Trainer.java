@@ -5,7 +5,7 @@ import ai.djl.ndarray.NDArray;
 import ai.djl.ndarray.NDManager;
 import ai.djl.ndarray.NDScope;
 import ai.djl.training.GradientCollector;
-import com.tinygpt.data.GPTDataLoader;
+import com.tinygpt.data.Batch;
 import com.tinygpt.generation.TextGenerator;
 import com.tinygpt.model.GPTModel;
 
@@ -46,14 +46,26 @@ public class Trainer {
      * @param evalEvery     measure train/validation loss every this many steps
      * @param samplePrompt  after each epoch, show what the model writes for this prompt
      */
-    public void train(GPTDataLoader trainLoader, GPTDataLoader validationLoader, int epochs, int evalEvery,
+    public void train(Iterable<Batch> trainLoader, Iterable<Batch> validationLoader, int epochs, int evalEvery,
                       TextGenerator generator, String samplePrompt) {
+        train(trainLoader, validationLoader, epochs, evalEvery, () -> {
+            String sample = generator.generateGreedy(samplePrompt, 25);
+            System.out.println("   sample: " + sample.replace("\n", " "));
+        });
+    }
+
+    /**
+     * @param evalEvery       measure train/validation loss every this many steps
+     * @param afterEachEpoch  runs at the end of every epoch, e.g. to print a sample
+     */
+    public void train(Iterable<Batch> trainLoader, Iterable<Batch> validationLoader, int epochs, int evalEvery,
+                      Runnable afterEachEpoch) {
         int globalStep = 0;
         long tokensSeen = 0;
 
         for (int epoch = 1; epoch <= epochs; epoch++) {
             model.setTraining(true);
-            for (GPTDataLoader.Batch batch : trainLoader) {
+            for (Batch batch : trainLoader) {
                 trainStep(batch);
                 globalStep++;
                 tokensSeen += (long) batch.inputs().length * batch.inputs()[0].length;
@@ -65,8 +77,7 @@ public class Trainer {
                             epoch, globalStep, tokensSeen, trainLoss, validationLoss);
                 }
             }
-            String sample = generator.generateGreedy(samplePrompt, 25);
-            System.out.println("   sample: " + sample.replace("\n", " "));
+            afterEachEpoch.run();
         }
         if (skippedSteps > 0) {
             System.out.printf("(Skipped %d of %d steps because a gradient came back as NaN.)%n", skippedSteps, globalStep);
@@ -74,7 +85,7 @@ public class Trainer {
     }
 
     /** The 5 moves of one training step. */
-    private void trainStep(GPTDataLoader.Batch batch) {
+    private void trainStep(Batch batch) {
         // NDScope frees every temporary array created inside it when the block ends.
         try (NDScope ignored = new NDScope()) {
             NDArray inputs = manager.create(batch.inputs());
@@ -93,12 +104,12 @@ public class Trainer {
     }
 
     /** Average loss over the first {@code maxBatches} batches, without training. */
-    public float averageLoss(GPTDataLoader loader, int maxBatches) {
+    public float averageLoss(Iterable<Batch> loader, int maxBatches) {
         boolean wasTraining = model.isTraining();
         model.setTraining(false);
         float total = 0;
         int count = 0;
-        for (GPTDataLoader.Batch batch : loader) {
+        for (Batch batch : loader) {
             if (count == maxBatches) {
                 break;
             }

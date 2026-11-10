@@ -35,9 +35,9 @@ public class SelfAttention extends Module {
     private final Linear value;
 
     public SelfAttention(NDManager manager, int inputDim, int outputDim) {
-        query = child(new Linear(manager, inputDim, outputDim, false));
-        key = child(new Linear(manager, inputDim, outputDim, false));
-        value = child(new Linear(manager, inputDim, outputDim, false));
+        query = child("query", new Linear(manager, inputDim, outputDim, false));
+        key = child("key", new Linear(manager, inputDim, outputDim, false));
+        value = child("value", new Linear(manager, inputDim, outputDim, false));
     }
 
     /** inputs [tokens, inputDim] -> context vectors [tokens, outputDim] */

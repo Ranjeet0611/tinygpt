@@ -51,6 +51,7 @@ flowchart LR
     S1["1<br/>words → numbers"] --> S2["2<br/>word pieces"] --> S3["3<br/>quizzes"] --> S4["4<br/>tables"]
     S4 --> S5["5<br/>look & mix"] --> S6["6<br/>Q K V"] --> S7["7<br/>no peeking"] --> S8["8<br/>many heads"]
     S8 --> S9["9<br/>whole brain"] --> S10["10<br/>how wrong?"] --> S11["11<br/>choosing words"] --> T["🏁 train!"]
+    T --> S12["12<br/>load GPT-2"] --> FT["🎓 finetune"] --> CH["💬 chat"]
 ```
 
 | Program | Shows | Uses these classes | Run |
@@ -66,5 +67,8 @@ flowchart LR
 | `Step09_GPTModel` | the full GPT-2 brain (163 million numbers) | `GPTModel`, `GPTConfig`, `TextGenerator` | `./run.sh 9` |
 | `Step10_Loss` | how wrong a new model is | `Loss`, `GPTModel` | `./run.sh 10` |
 | `Step11_Sampling` | greedy, temperature, top-k | `TextGenerator` | `./run.sh 11` |
+| `Step12_LoadGPT2` | OpenAI's GPT-2 numbers inside our model; the word-for-word check | `GPT2Size`, `GPT2Weights`, `SafeTensors` | `./run.sh 12` |
+
+The two chat programs, `FineTune` and `Chat`, are explained with the other [chat classes](9-chat.md).
 
 🔗 **In the code:** [`examples/`](../../src/main/java/com/tinygpt/examples)

@@ -25,10 +25,7 @@ import java.util.Random;
  *
  * Picture guide: docs/classes/2-data.md#gptdataloader
  */
-public class GPTDataLoader implements Iterable<GPTDataLoader.Batch> {
-
-    /** A batch of inputs and their matching targets. Both have shape [batchSize][maxLength]. */
-    public record Batch(int[][] inputs, int[][] targets) {}
+public class GPTDataLoader implements Iterable<Batch> {
 
     private final GPTDataset dataset;
     private final int batchSize;

@@ -1,5 +1,6 @@
 package com.tinygpt.examples;
 
+import com.tinygpt.data.Batch;
 import com.tinygpt.data.GPTDataLoader;
 import com.tinygpt.data.GPTDataset;
 import com.tinygpt.data.SampleText;
@@ -42,7 +43,7 @@ public class Step03_SlidingWindow {
 
         // 3. Batches
         GPTDataLoader loader = new GPTDataLoader(dataset, 8, false, true);
-        GPTDataLoader.Batch first = loader.iterator().next();
+        Batch first = loader.iterator().next();
         System.out.println("3) First batch of 8 examples:");
         System.out.println("   inputs  = " + Arrays.deepToString(first.inputs()));
         System.out.println("   targets = " + Arrays.deepToString(first.targets()));

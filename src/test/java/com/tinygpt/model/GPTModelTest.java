@@ -15,6 +15,7 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GPTModelTest {
 
@@ -53,6 +54,15 @@ class GPTModelTest {
         long ds = SMALL.embeddingDim();
         long smallPerBlock = 4 * ds + 3 * ds * ds + (ds * ds + ds) + (4 * ds * ds + 4 * ds) + (4 * ds * ds + ds);
         assertEquals(100 * ds + 8 * ds + 2 * smallPerBlock + 2 * ds + ds * 100, small.parameterCount());
+    }
+
+    @Test
+    void parametersHaveReadableNames() {
+        var names = new GPTModel(manager, SMALL).namedParameters().keySet();
+        assertTrue(names.contains("tokenEmbedding.weight"));
+        assertTrue(names.contains("blocks.1.attention.query.weight"));
+        assertTrue(names.contains("blocks.0.feedForward.expand.bias"));
+        assertTrue(names.contains("outputHead.weight"));
     }
 
     @Test

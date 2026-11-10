@@ -39,6 +39,8 @@ flowchart TD
 
     BRAIN --> TG["✍️ TextGenerator<br/>writes new text"]
     CFG["📋 GPTConfig<br/>size settings"] -.-> BRAIN
+    GW["📦 GPT2Weights<br/>OpenAI's numbers"] -.->|"or start from GPT-2"| BRAIN
+    BRAIN -->|"fine-tuned"| CH["💬 Chat"]
 ```
 
 And here is what is **inside** one `TransformerBlock`:
@@ -80,8 +82,17 @@ flowchart LR
 | | `AdamW` | Nudges every number to make the model a little less wrong. | [training](6-training.md#adamw) |
 | | `Trainer` | The practice coach: repeats guess → check → fix. | [training](6-training.md#trainer) |
 | generation | `TextGenerator` | Writes text one word at a time. | [generation](7-generation.md#textgenerator) |
+| data | `Batch` | One box of inputs and targets, shared by both kinds of training data. | [data](2-data.md#batch) |
+| pretrained | `GPT2Size` | Small or medium GPT-2: settings, download address, file names. | [chat](9-chat.md#gpt2size) |
+| | `Downloads` | Downloads a file once and keeps it. | [chat](9-chat.md#downloads) |
+| | `SafeTensors` | Reads Hugging Face's weight file format. | [chat](9-chat.md#safetensors) |
+| | `GPT2Weights` | Puts OpenAI's GPT-2 numbers into our model. | [chat](9-chat.md#gpt2weights) |
+| instruct | `Instruction` | One "request → good answer" example, in the chat format. | [chat](9-chat.md#instruction) |
+| | `InstructionDataLoader` | Pads different-length examples into batches. | [chat](9-chat.md#instructiondataloader) |
 | (root) | `TinyGPT` | The main program: train, save, write. | [main and examples](8-main-and-examples.md#tinygpt) |
-| examples | `Step01` … `Step11` | Small runnable demos, one per idea. | [main and examples](8-main-and-examples.md#the-step-programs) |
+| | `FineTune` | Teaches GPT-2 to follow instructions. | [chat](9-chat.md#finetune) |
+| | `Chat` | Talk to the fine-tuned GPT-2 in the terminal. | [chat](9-chat.md#chat) |
+| examples | `Step01` … `Step12` | Small runnable demos, one per idea. | [main and examples](8-main-and-examples.md#the-step-programs) |
 
 ---
 

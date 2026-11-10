@@ -35,10 +35,10 @@ public class CausalAttention extends Module {
     private final Dropout dropout;
 
     public CausalAttention(NDManager manager, int inputDim, int outputDim, float dropoutRate) {
-        query = child(new Linear(manager, inputDim, outputDim, false));
-        key = child(new Linear(manager, inputDim, outputDim, false));
-        value = child(new Linear(manager, inputDim, outputDim, false));
-        dropout = child(new Dropout(dropoutRate));
+        query = child("query", new Linear(manager, inputDim, outputDim, false));
+        key = child("key", new Linear(manager, inputDim, outputDim, false));
+        value = child("value", new Linear(manager, inputDim, outputDim, false));
+        dropout = child("dropout", new Dropout(dropoutRate));
     }
 
     /** inputs [batch, tokens, inputDim] -> context vectors [batch, tokens, outputDim] */

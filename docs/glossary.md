@@ -47,6 +47,14 @@
 | **Validation set** | Text kept aside and never trained on, used to check the model on new text. | [training](06-training.md) |
 | **Overfitting** | Memorising the training text instead of learning general patterns. | [training](06-training.md) |
 | **NaN** | "Not a Number": what you get from things like 0 ÷ 0. One NaN in training spreads everywhere. | [README](../README.md#known-issue-an-occasional-skipped-step) |
+| **Pretrained weights** | Numbers someone else already trained (e.g. OpenAI's GPT-2) that you load into the same design instead of training from zero. | [chat](09-chat-with-gpt2.md) |
+| **safetensors** | A file format for sharing model numbers: a table of contents, then all the numbers. | [chat](09-chat-with-gpt2.md) |
+| **Instruction fine-tuning** | Extra practice on "request → good answer" examples, so the model answers instead of just continuing text. | [chat](09-chat-with-gpt2.md) |
+| **Prompt format (Alpaca)** | The fixed layout (`### Instruction:` … `### Response:`) that shows the model where the question ends and its answer begins. | [chat](09-chat-with-gpt2.md) |
+| **Padding** | Filler tokens added so different-length examples fit in one batch. | [chat](09-chat-with-gpt2.md) |
+| **Ignore index (-100)** | A target value meaning "don't grade this position", used for padding. | [chat](09-chat-with-gpt2.md) |
+| **Weight tying** | Using the same table for the token embedding and the output head, as GPT-2 does. | [embeddings](03-embeddings.md) |
+| **Hallucination** | A model stating something false with confidence. | [chat](09-chat-with-gpt2.md) |
 | **Greedy decoding** | Always picking the highest-scoring next token. | [writing text](07-generating-text.md) |
 | **Temperature** | How random the choice is. Low = careful, high = creative. | [writing text](07-generating-text.md) |
 | **Top-k** | Only choosing among the k best tokens. | [writing text](07-generating-text.md) |
