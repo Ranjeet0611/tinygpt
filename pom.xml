@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tinygpt</groupId>
+    <artifactId>tinygpt</artifactId>
+    <version>0.1.0</version>
+    <name>TinyGPT</name>
+    <description>A tiny GPT-style language model built step by step in Java</description>
+
+    <properties>
+        <java.version>25</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <djl.version>0.39.0</djl.version>
+        <pytorch.version>2.7.1</pytorch.version>
+        <jtokkit.version>1.1.0</jtokkit.version>
+        <junit.version>6.0.3</junit.version>
+
+        <!-- Which program `./mvnw exec:java` runs. Override with -Dexec.mainClass=... -->
+        <exec.mainClass>com.tinygpt.TinyGPT</exec.mainClass>
+    </properties>
+
+    <dependencies>
+        <!-- GPT-2's byte pair encoding tokenizer (same as Python's tiktoken) -->
+        <dependency>
+            <groupId>com.knuddels</groupId>
+            <artifactId>jtokkit</artifactId>
+            <version>${jtokkit.version}</version>
+        </dependency>
+
+        <!-- DJL gives us tensors (NDArray) and automatic gradients, like PyTorch does in the book -->
+        <dependency>
+            <groupId>ai.djl</groupId>
+            <artifactId>api</artifactId>
+            <version>${djl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ai.djl.pytorch</groupId>
+            <artifactId>pytorch-engine</artifactId>
+            <version>${djl.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>ai.djl.pytorch</groupId>
+            <artifactId>pytorch-jni</artifactId>
+            <version>${pytorch.version}-${djl.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Quiet the "no SLF4J provider" warning that DJL would print -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>2.0.17</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <argLine>--enable-native-access=ALL-UNNAMED</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass>
+                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+      PyTorch ships a different native library for each operating system.
+      Maven picks the right one for your computer automatically.
+      On any other platform DJL downloads a matching library the first time you run.
+    -->
+    <profiles>
+        <profile>
+            <id>mac-arm64</id>
+            <activation><os><family>mac</family><arch>aarch64</arch></os></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>ai.djl.pytorch</groupId>
+                    <artifactId>pytorch-native-cpu</artifactId>
+                    <version>${pytorch.version}</version>
+                    <classifier>osx-aarch64</classifier>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>linux-x86_64</id>
+            <activation><os><name>Linux</name><arch>amd64</arch></os></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>ai.djl.pytorch</groupId>
+                    <artifactId>pytorch-native-cpu</artifactId>
+                    <version>${pytorch.version}</version>
+                    <classifier>linux-x86_64</classifier>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>windows-x86_64</id>
+            <activation><os><family>windows</family><arch>amd64</arch></os></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>ai.djl.pytorch</groupId>
+                    <artifactId>pytorch-native-cpu</artifactId>
+                    <version>${pytorch.version}</version>
+                    <classifier>win-x86_64</classifier>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
